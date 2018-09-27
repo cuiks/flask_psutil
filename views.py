@@ -14,7 +14,7 @@ from forms import LoginForm
 from save_status import save_cpu
 import captcha
 from tongyong import zbx_req
-from Fabrics import main
+from Fabrics import fabfile
 
 async_mode = None
 app = Flask(__name__)
@@ -221,8 +221,7 @@ def register_post():
 def fabric():
     command = request.form['comm_text']
     print(command)
-    command = str(command).strip()
-    comm_result = main.comm_result(command)
+    comm_result = fabfile.comm_result(command)
     print(comm_result)
     return render_template('index.html', user=is_login, comm_result=comm_result)
 

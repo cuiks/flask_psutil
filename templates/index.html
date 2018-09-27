@@ -128,9 +128,11 @@
                 请输入命令: <input type="text" name="comm_text">
                 <input type="submit" value="执行">
             </form>
-            <textarea name="fabric_result" id="" cols="30" rows="10" style="width: 800px; height: 500px">
+            <textarea name="fabric_result" style="width: 800px; height: 500px">
                 返回信息：
-                {{ comm_result }}
+                {% for result in comm_result %}
+                    {{ result }}
+                {% endfor %}
             </textarea>
         </div>
     <br><br><br><br><br><br><br><br><br><br>
