@@ -17,3 +17,4 @@ def comm_result(comm):
     for val in a.values():
         result_list.append(val)
     return result_list
+
