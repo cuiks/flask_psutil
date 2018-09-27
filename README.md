@@ -7,6 +7,6 @@
 在创建models时，Role使用到表:'user',user表结构为:id,email,password。
 数据示例:`1  1@1.com  123`
 在save_status文件中保存cpu数据使用到表cpu_used;结构为:id,cpu_used,add_time。
-数据示例：`1 10.1 1537517750804`
-2。因为使用socketio运行的方式，所以使用pycharm启动时，控制台不会显示启动的host。
-3。使用socketio的方式，让后端程序在产生数据后主动向前端js推送。
+数据示例：`1 10.1 1537517750804`<br>
+2。因为使用socketio运行的方式，所以使用pycharm启动时，控制台不会显示启动的host。<br>
+3。使用socketio的方式，让后端程序在产生数据后主动向前端js推送。<br>
