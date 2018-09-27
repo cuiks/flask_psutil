@@ -2,8 +2,9 @@
 ## 整体的框架是使用的Flask
 为了方便大家直接使用，本系统需要配置：
 
-1。创建本地数据库。
+1。链接本地数据库。
 `app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://数据库用户:数据库密码@127.0.0.1/数据库名`
+用到的表：<br>
 在创建models时，Role使用到表:'user',user表结构为:id,email,password。
 数据示例:`1  1@1.com  123`
 在save_status文件中保存cpu数据使用到表cpu_used;结构为:id,cpu_used,add_time。
