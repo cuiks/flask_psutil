@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import psutil
-alls= psutil.disk_partitions()
-for all in alls:
-    print(psutil.disk_usage(all.device))
+
+for i in range(9,0,-1):
+    j = str(i)
+    print(j*i)
