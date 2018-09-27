@@ -109,11 +109,11 @@
                     <option value="2">获取所有图形信息</option>
                     <option value="3">所有已配置的用户</option>
                 </select>
-                <input type="submit" value="提交"><br><br>
+                <input type="submit" value="提交"><br>
             </form>
             <br><br>
             <div>
-                <textarea style="width: 800px; height: 500px">
+                <textarea style="width: 800px; height: 200px">
                     {% for result in results %}
                         {% for re in result %}
                             {{ re }}:{{ result[re] }}
@@ -122,6 +122,18 @@
                 </textarea>
             </div>
         </div>
+        <br><br>
+        <div class="content" >
+            <form action="/fabric" method="post">
+                请输入命令: <input type="text" name="comm_text">
+                <input type="submit" value="执行">
+            </form>
+            <textarea name="fabric_result" id="" cols="30" rows="10" style="width: 800px; height: 500px">
+                返回信息：
+                {{ comm_result }}
+            </textarea>
+        </div>
+    <br><br><br><br><br><br><br><br><br><br>
     </div>
 </div>
 
