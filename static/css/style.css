@@ -1,0 +1,11 @@
+body {
+    background: url("../images/back.jpg");
+    background-repeat: repeat;
+}
+
+#content_style {
+    height: 100px;
+    background-color: #2aabd2;
+    text-align: center;
+    color: red;
+}

@@ -1,0 +1,207 @@
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cpu信息</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/amazeui.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/core.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/menu.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/index.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/admin.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static',filename='assets/css/page/typography.css') }}"/>
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/js/jquery-2.1.0.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/js/amazeui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/js/app.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/js/blockUI.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/js/charts/echarts.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/js/charts/pieChart.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/js/charts/highcharts.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/js/charts/exporting.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/js/charts/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/js/charts/socket.io.min.js') }}"></script>
+    <!-- ECharts 3 引入 -->
+    <script type="text/javascript" src="{{ url_for('static',filename='assets/js/charts/echarts.min.js') }}"></script>
+
+</head>
+<body>
+<!-- Begin page -->
+<header class="am-topbar am-topbar-fixed-top">
+    <div class="am-topbar-left am-hide-sm-only">
+        <a href="/logout" class="logo"><span>Log<span>Out</span></span><i class="zmdi zmdi-layers"></i></a>
+    </div>
+
+    <div class="contain">
+        <ul class="am-nav am-navbar-nav am-navbar-left">
+
+            <li><h4 class="page-title">CPU信息</h4></li>
+        </ul>
+
+        <ul class="am-nav am-navbar-nav am-navbar-right">
+            <li class="inform"><i class="am-icon-bell-o" aria-hidden="true"></i></li>
+            <li class="hidden-xs am-hide-sm-only">
+                <form role="search" class="app-search">
+                </form>
+            </li>
+        </ul>
+    </div>
+</header>
+
+
+<div class="admin">
+
+    <div class="admin-sidebar am-offcanvas  am-padding-0" id="admin-offcanvas">
+        <div class="am-offcanvas-bar admin-offcanvas-bar">
+            <!-- User -->
+            <div class="user-box am-hide-sm-only">
+                <div class="user-img">
+                    <img src="{{ url_for('static',filename='assets/img/avatar-1.jpg') }}" alt="头像" title="监控系统"
+                         class="img-circle img-thumbnail img-responsive">
+                    <div class="user-status offline"><i class="am-icon-dot-circle-o" aria-hidden="true"></i></div>
+                </div>
+                <h5><a href="#">{{ user }}</a></h5>
+                <ul class="list-inline">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="text-custom">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- End User -->
+
+            <ul class="am-list admin-sidebar-list">
+                <li><a href="/index"><span class="am-icon-home"></span> 首页</a></li>
+                <li class="admin-parent">
+                    <a href="/user" class="am-cf" data-am-collapse="{target: '#collapse-nav1'}"><span
+                            class="am-icon-table"></span>
+                        cpu,进程 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav1">
+                        <li><a href="/cpu" class="am-cf"> cpu信息</a></li>
+                        <li><a href="/user" class="am-cf"> 进程信息</a></li>
+                    </ul>
+                </li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><i class="am-icon-line-chart"
+                                                                                      aria-hidden="true"></i> 内存，磁盘,网络
+                        <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav2">
+                        <li><a href="/memory" class="am-cf"> 内存</a></li>
+                        <li><a href="/disk" class="am-cf"> 磁盘</a></li>
+                        <li><a href="/net" class="am-cf"> 网络</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="content-page">
+        <div class="am-g">
+            <div class="am-u-md-12">
+                <div class="card-box">
+                    <div id="trends" style="min-width:400px;height:400px"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    Highcharts.setOptions({
+        global: {
+            useUTC: false
+        }
+    });
+
+    function activeLastPointToolip(chart) {
+        var points = chart.series[0].points;
+        chart.tooltip.refresh(points[points.length - 1]);
+    }
+
+    var time = [],
+        cpu = [];
+
+
+    var chart = Highcharts.chart('trends', {
+        chart: {
+            type: 'spline',
+            marginRight: 10,
+            events: {
+                load: function () {
+                    var series = this.series[0],
+                        chart = this;
+                    activeLastPointToolip(chart);
+                    setInterval(function () {
+                        var x = time.shift(), // 当前时间
+                            y = cpu.shift();          // 随机值
+                        series.addPoint([x, y], true, true);
+                        activeLastPointToolip(chart);
+                    }, 1000);
+                }
+            }
+        },
+        title: {
+            text: '动态模拟实时数据'
+        },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) + '<br/>' +
+                    Highcharts.numberFormat(this.y, 2);
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        series: [{
+            name: '随机数据',
+            data: (function () {
+                // 生成随机值
+                var data = [],
+                    time = (new Date()).getTime(),
+                    i;
+                for (i = -19; i <= 0; i += 1) {
+                    data.push({
+                        x: time + i * 1000,
+                        y: 0
+                    });
+                }
+                return data;
+            }())
+        }]
+    });
+    // 建立socket连接，等待服务器“推送”数据，用回调函数更新图表
+    $(document).ready(function () {
+        namespace = '/get_datas';
+        var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
+
+        socket.on('server_response', function (res) {
+
+            cpu.push(res.cpu_used);
+            time.push(res.add_time);
+
+        });
+
+    });
+</script>
+
+
+</body>
+
+</html>
