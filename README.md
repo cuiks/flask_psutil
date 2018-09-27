@@ -11,3 +11,10 @@
 数据示例：`1 10.1 1537517750804`<br>
 2。因为使用socketio运行的方式，所以使用pycharm启动时，控制台不会显示启动的host。<br>
 3。使用socketio的方式，让后端程序在产生数据后主动向前端js推送。<br>
+4。tongyong.py文件为使用zabbix的API，所以需要有一台安装了zabbix的linux机器，然后修改：<br>
+`zbx_url = "http://192.168.1.148/zabbix/api_jsonrpc.php"
+zabbix_user = "Admin"
+zabbix_pwd = "zabbix"`
+5。Fabrics下的frbfile为使用fabric，所以需要一台装有fabric的linux机器。然后修改:<br>
+`env.hosts = ['root@liunx_host:22']
+env.passwords= {'root@linux_host:22':'password'}`
