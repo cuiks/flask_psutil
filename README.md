@@ -1,4 +1,11 @@
 # psutil_webshow
-# 整体的框架是使用的Flask
-后台主要的功能是使用psutil库抓取系统的状态信息，然后推送到前台，在前台使用js进行渲染，得到机器状态效果。
-连接了mysql数据库用于实现登录，注册功能，数据库中也保存了cpu的信息。但是数据库不会影响前端显示效果。因为前端数据的渲染和后台存库是一起的。
+## 整体的框架是使用的Flask
+为了方便大家直接使用，本系统需要配置：
+1。创建本地数据库。
+`app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://数据库用户:数据库密码@127.0.0.1/数据库名`
+在创建models时，Role使用到表:'user',user表结构为:id,email,password。
+数据示例:`1  1@1.com  123`
+在save_status文件中保存cpu数据使用到表cpu_used;结构为:id,cpu_used,add_time。
+数据示例：`1 10.1 1537517750804`
+2。因为使用socketio运行的方式，所以使用pycharm启动时，控制台不会显示启动的host。
+3。使用socketio的方式，让后端程序在产生数据后主动向前端js推送。
