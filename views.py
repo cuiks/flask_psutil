@@ -200,19 +200,12 @@ def register_post():
         return render_template('register.html', state='验证码错误', email_re=request.form['email'], img_name=img_name,
                                captcha_str=captcha_str)
     email = db.session.query(Role).filter_by(email=email_tem).first()
-    # sql = "select * from user where email='{0}'".format(email_tem)
-    # cursor.execute(sql)
-    # email = cursor.fetchall()
     if email:
         return render_template('register.html', state='此用户已注册!', email_re=request.form['email'], img_name=img_name,
                                captcha_str=captcha_str)
     user_add = Role(email=email_tem, password=password_tem)
     db.session.add(user_add)
     db.session.commit()
-    # sql = "INSERT INTO user(email,password) VALUES('{0}','{1}')".format(email_tem, password_tem)
-    # cursor.execute(sql)
-    # print(sql)
-    # conn.commit()
     return render_template('register.html', state='注册成功', email_re=request.form['email'], img_name=img_name,
                            captcha_str=captcha_str)
 
