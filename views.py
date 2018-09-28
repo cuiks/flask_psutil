@@ -28,6 +28,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:cui123@127.0.0.1/bootstrap
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['SQLALCHEMY_ECHO'] = True
+
 db.init_app(app)
 
 is_login = ''
