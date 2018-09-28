@@ -29,6 +29,6 @@ def add_info(info):
         s = smtplib.SMTP(host, port)
         s.login(sender, 'cui5211314')
         s.sendmail(sender, receiver, msg.as_string())
-        print('************cpu占用超过 40%，提醒邮件发送成功************')
+        print('************cpu占用超过 80%，提醒邮件发送成功************')
     except smtplib.SMTPException as e:
         print(e)

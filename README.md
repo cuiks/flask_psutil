@@ -18,4 +18,4 @@ zabbix_pwd = "zabbix"`
 5。Fabrics下的frbfile为使用fabric，所以需要一台装有fabric的linux机器。然后修改:<br>
 `env.hosts = ['root@liunx_host:22']
 env.passwords= {'root@linux_host:22':'password'}`
-6。post_email文件中，sender需要替换成自己的邮箱，receiver替换成自己的接收邮箱。s.login(sender,password)后面的密码也要改为自己的
+6。post_email文件中，host替换为自己邮箱的服务器，sender需要替换成自己的邮箱，receiver替换成自己的接收邮箱。s.login(sender,password)后面的密码也要改为自己的
