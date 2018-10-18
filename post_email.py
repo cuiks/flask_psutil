@@ -3,10 +3,10 @@
 import smtplib
 from email.mime.text import MIMEText
 
-host = 'smtp.aliyun.com'
+host = '邮箱host'
 port = 25
-sender = 'hero777@aliyun.com'
-receiver = 'register012@163.com'
+sender = '发送邮箱'
+receiver = '接受邮箱'
 
 
 def add_info(info):
@@ -27,7 +27,7 @@ def add_info(info):
 
     try:
         s = smtplib.SMTP(host, port)
-        s.login(sender, 'cui5211314')
+        s.login(sender, '邮箱密码')
         s.sendmail(sender, receiver, msg.as_string())
         print('************cpu占用超过 80%，提醒邮件发送成功************')
     except smtplib.SMTPException as e:
