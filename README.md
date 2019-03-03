@@ -1,4 +1,4 @@
-# psutil_webshow
+# psutil+flask+Highcharts系统试试监控
 ## 整体的框架是使用的Flask
 为了方便大家直接使用，本系统需要配置：
 
@@ -12,10 +12,10 @@
 2。因为使用socketio运行的方式，所以使用pycharm启动时，控制台不会显示启动的host。<br>
 3。使用socketio的方式，让后端程序在产生数据后主动向前端js推送。<br>
 4。tongyong.py文件为使用zabbix的API，所以需要有一台安装了zabbix的linux机器，然后修改：<br>
-`zbx_url = "http://192.168.1.148/zabbix/api_jsonrpc.php"
-zabbix_user = "Admin"
-zabbix_pwd = "zabbix"`
+`zbx_url = "http://192.168.1.148/zabbix/api_jsonrpc.php"<br>
+zabbix_user = "Admin"<br>
+zabbix_pwd = "zabbix"`<br>
 5。Fabrics下的frbfile为使用fabric，所以需要一台装有fabric的linux机器。然后修改:<br>
-`env.hosts = ['root@liunx_host:22']
-env.passwords= {'root@linux_host:22':'password'}`
-6。post_email文件中，host替换为自己邮箱的服务器，sender需要替换成自己的邮箱，receiver替换成自己的接收邮箱。s.login(sender,password)后面的密码也要改为自己的
+`env.hosts = ['root@liunx_host:22']<br>
+env.passwords= {'root@linux_host:22':'password'}`<br>
+6。post_email文件中，host替换为自己邮箱的服务器，sender需要替换成自己的邮箱，receiver替换成自己的接收邮箱。s.login(sender,password)后面的密码也要改为自己的<br>
