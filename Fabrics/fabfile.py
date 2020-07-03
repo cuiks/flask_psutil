@@ -4,7 +4,7 @@ from fabric.api import run, env
 from fabric.tasks import execute
 
 env.hosts = ['root@192.168.1.148:22']
-env.passwords= {'root@192.168.1.148:22':'cui123'}
+env.passwords= {'root@192.168.1.148:22':'***'}
 
 
 def run_command(command=''):
